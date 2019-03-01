@@ -1,0 +1,39 @@
+ {% load static %}
+{% block content %}
+    {% load bootstrap4 %}
+{% block styles %}
+    {% bootstrap_css %}
+  {% endblock %}
+
+<div class="container">
+    <div class="row">
+
+    <div class="col-md-6">
+
+         {% if profile_details.photo %}
+        <img src="{{profile_details.photo.url}}" alt="profile-photo" class="img-thumbnail rounded-circle prof" style="width: 200px;height: 200px">
+        {% else %}
+        <img src="{% static 'images/avatar.jpg' %}" alt="avatar" class="img-thumbnail rounded-circle prof" style="width: 200px;height: 200px">
+        {% endif %}
+
+
+                {% if profile_details.bio %}
+        <h1>{{ profile_details.bio }}</h1>
+        {% else %}
+        <h1>No bio</h1>
+        {% endif %}
+
+    </div>
+    <div class="col-md-6">
+ <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-sm btn-primary bio" value="Submit">
+                        </div>
+                        <input type="hidden" name="next" value="/profile">
+                    </form>
+    </div>
+</div>
+    </div>
+{% endblock %}

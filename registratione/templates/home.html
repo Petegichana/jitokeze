@@ -1,0 +1,49 @@
+{% load bootstrap4 %}
+{% load static %}
+{% block styles %}
+    {% bootstrap_css %}
+  {% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+    <div class="container">
+    <div class="row">
+
+        <div class="col-md-4">
+            <a href="/accounts/login"><button type="button" class="btn btn-outline-primary">Login</button></a>
+
+<a href="{% url 'signup' %}"><button type="button" class="btn btn-outline-success">Sign Up</button></a>
+
+
+        </div>
+        <div class="col-md-4">
+    <p>Welcome {{ user.username }}</p>
+
+                {% if profile_details.photo %}
+        <img src="{{profile_details.photo.url}}" alt="profile-photo" class="img-thumbnail rounded-circle prof" style="width: 200px;height: 200px">
+        {% else %}
+        <img src="{% static 'images/avatar.jpg' %}" alt="avatar" class="img-thumbnail rounded-circle prof" style="width: 200px;height: 200px">
+        {% endif %}
+
+
+                {% if profile_details.bio %}
+        <h1>{{ profile_details.bio }}</h1>
+        {% else %}
+        <h1>No bio</h1>
+        {% endif %}
+
+
+
+</div>
+
+           <div class="col-md-4">
+
+               <a href="/accounts/edit"><button type="button" class="btn btn-outline-info">Edit Profile</button></a>
+               <a href="/accounts/password/change/"><button type="button" class="btn btn-outline-warning">Change Password</button></a>
+   <a href="/logout/"><button type="button" class="btn btn-outline-secondary">Logout</button> </a>
+</div>
+    </div>
+    </div>
+{% endif %}
+{% endblock %}
