@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <head>
+
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="description" content="">
+            <meta name="author" content="">
+
+            <title>Counselling Hub</title>
+
+            <!-- Bootstrap core CSS -->
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+                  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+                  crossorigin="anonymous">
+            <link rel="stylesheet"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+                  integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+                  crossorigin="anonymous">
+
+            <!-- Custom styles for this template -->
+            <link href="css/modern-business.css" rel="stylesheet">
+
+            {% block styles %}
+                <link href="{% static 'css/css.css' %}">
+            {% endblock %}
+
+
+
+
+        </head>
+
+    </head>
+
+
+    <body bgcolor="#f0f8ff">
+    {% block content %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav ms-auto">
+         <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Shelters<span class="sr-only">(current)</span></a>
+      </li>
+
+         <li class="nav-item active">
+        <a class="nav-link" href="#">Events<span class="sr-only">(current)</span></a>
+      </li>
+          <li class="nav-item active">
+        <a class="nav-link" href="#">Donate<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/accounts/login/">Login<span class="sr-only">(current)</span></a>
+      </li>
+          <li class="nav-item active">
+        <a class="nav-link" href="/accounts/register/">Register<span class="sr-only">(current)</span></a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+     {% endblock %}
+    </body>
+</html>

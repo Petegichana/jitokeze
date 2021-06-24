@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -25,22 +24,43 @@ SECRET_KEY = '8r2lhl$oh5t=9evk=g7y!yh%nm1%k2&(i302-xvsn=t_k3+%(5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['9d01871397e0.ngrok.io', 'localhost', '127.0.0.1']
 
+# EASY_MAPS_GOOGLE_KEY = 'AIzaSyDVcTNwyy3SjCZ6TiEPT1bz8o46Y_lnevo'
+
+# EASY_MAPS_CENTER = (-41.3, 32)
 
 # Application definition
 
 INSTALLED_APPS = [
     'registratione',
+    'mapwidgets',
+    'django_restframework',
+    'django_registration',
+    'ckeditor',
+    'star_ratings',
+    'floppyforms',
     'bootstrap4',
-    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis'
 ]
+
+# Map settings
+GOOGLE_MAP_API_KEY = 'AIzaSyDVcTNwyy3SjCZ6TiEPT1bz8o46Y_lnevo'
+MAP_WIDGETS = {
+    "GooglePointFieldWidget": (
+        ("zoom", 15),
+        ("mapCenterLocationName", "amsterdam"),
+        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'nl'}}),
+        ("markerFitZoom", 12),
+    ),
+    "GOOGLE_MAP_API_KEY": GOOGLE_MAP_API_KEY
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -74,19 +94,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'DjangoRegistration.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'registration',
-        'USER': 'sigilai',
-    'PASSWORD':'sigilai',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'housingproject',
+        'USER': 'postgres',
+        'PASSWORD': 'sigilai',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -106,6 +126,35 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CKEDITOR_CONFIGS = {
+    # django-ckeditor defaults
+    'default': {
+        # Editor Width Adaptation
+        'width': 'auto',
+        'height': '250px',
+        # tab key conversion space number
+        'tabSpaces': 4,
+        # Toolbar Style
+        'toolbar': 'Custom',
+        # Toolbar buttons
+        'toolbar_Custom': [
+            # Emotional Code Block
+            ['Smiley', 'CodeSnippet'],
+            # Font Style
+            ['Bold', 'Italic', 'Underline', 'RemoveFormat', 'Blockquote'],
+            # Font color
+            ['TextColor', 'BGColor'],
+
+            ['Link', 'Unlink'],
+
+            ['NumberedList', 'BulletedList'],
+
+            ['Maximize']
+        ],
+        # Add Code Block Plug-ins
+        'extraPlugins': ','.join(['codesnippet']),
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -120,7 +169,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
@@ -129,9 +177,8 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-EMAIL_USE_TLS=True
-EMAIL_HOST='smtp.googlemail.com'
-EMAIL_PORT=587
-EMAIL_HOST_USER='tirexapp@gmail.com'
-EMAIL_HOST_PASSWORD='Murselago1998!'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.googlemail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'tirexapp@gmail.com'
+EMAIL_HOST_PASSWORD = 'Murselago1998!'

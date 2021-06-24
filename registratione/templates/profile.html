@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+ {{ block.super }}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+                <a href="/accounts/login">
+                    <button type="button" class="btn btn-outline-primary">Login</button>
+                </a>
+
+                <a href="/accounts/register/">
+                    <button type="button" class="btn btn-outline-success">Sign Up</button>
+                </a>
+
+
+            </div>
+            <div class="col-md-4">
+                <p>Welcome <span style="font-weight: bold">{{ user.username }}</span></p>
+
+                {% if profile_details.photo %}
+                    <img src="{{ profile_details.photo.url }}" alt="profile-photo"
+                         class="img-thumbnail rounded-circle prof" style="width: 200px;height: 200px">
+                {% else %}
+                    <img src="{% static 'images/avatar.jpg' %}" alt="avatar" class="img-thumbnail rounded-circle prof"
+                         style="width: 200px;height: 200px">
+                {% endif %}
+
+
+                {% if profile_details.bio %}
+                    <h1>{{ profile_details.bio }}</h1>
+                {% else %}
+                    <h1>No bio</h1>
+                {% endif %}
+
+
+            </div>
+
+            <div class="col-md-4">
+
+                <a href="/accounts/edit">
+                    <button type="button" class="btn btn-outline-info">Edit Profile</button>
+                </a>
+                <a href="/accounts/password/change/">
+                    <button type="button" class="btn btn-outline-warning">Change Password</button>
+                </a>
+                <a href="/logout/">
+                    <button type="button" class="btn btn-outline-secondary">Logout</button>
+                    {% for receipt in receipt_details %}
+                        {% if receipt.payment_status == 'Paid' %}
+                    <button type="button" class="btn btn-success" onclick="createPDF()">Generate Receipt</button>
+                        {% else %}
+
+                        {% endif %}
+                    {% endfor %}
+                </a>
+            </div>
+        </div>
+
+        <h1>Receipt</h1>
+        <div id="tab">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Receipt ID</th>
+                    <th scope="col">Payer</th>
+                    <th scope="col">Phone</th>
+                     <th scope="col">Apartment Name</th>
+                    <th scope="col">Payment Amount</th>
+                    <th scope="col">Payment ID</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date Paid</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for receipt in receipt_details %}
+                    <tr>
+                        <th scope="row">{{ receipt.id }}</th>
+                        <td>{{ receipt.payer }}</td>
+                        <td>{{ receipt.phone }}</td>
+                        <td>{{ receipt.apartment }}</td>
+                        <td>{{ receipt.payment_amount }}</td>
+                        <td>{{ receipt.payment_id }}</td>
+                        <td>{{ receipt.payment_status }}</td>
+                        <td>{{ receipt.date_paid }}</td>
+
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+        function createPDF() {
+            var sTable = document.getElementById('tab').innerHTML;
+
+            var style = "<style>";
+            style = style + "table {width: 100%;font: 17px Calibri;}";
+            style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+            style = style + "padding: 2px 3px;text-align: center;}";
+            style = style + "</style>";
+
+            // CREATE A WINDOW OBJECT.
+            var win = window.open('', '', 'height=700,width=700');
+
+            win.document.write('<html><head>');
+            win.document.write('<title>Profile</title>');   // <title> FOR PDF HEADER.
+            win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+            win.document.write('</head>');
+            win.document.write('<body>');
+            win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+            win.document.write('</body></html>');
+
+            win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+            win.print();    // PRINT THE CONTENTS.
+        }
+    </script>
+
+{% endblock %}
