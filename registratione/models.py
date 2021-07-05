@@ -46,9 +46,9 @@ REGION_CHOICES = (
 
 class Shelter(models.Model):
     name = models.TextField(null=True)
-    price = models.TextField(null=True, blank=True,max_length=30)
     owner_phone = models.TextField(null=True, blank=True,max_length=30)
     photo = models.ImageField(upload_to='apartment/', null=True)
+    contact = RichTextField(null=True, blank=True, max_length=30000)
     description = RichTextField(null=True, blank=True,max_length=30000)
     # ratings = GenericRelation(Rating, related_query_name='foos')
     region = models.CharField(max_length=20, choices=REGION_CHOICES, default='kasarani', null=True)

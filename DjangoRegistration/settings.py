@@ -24,7 +24,7 @@ SECRET_KEY = '8r2lhl$oh5t=9evk=g7y!yh%nm1%k2&(i302-xvsn=t_k3+%(5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['9d01871397e0.ngrok.io', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['9914fb8589cb.ngrok.io', 'localhost', '127.0.0.1']
 
 # EASY_MAPS_GOOGLE_KEY = 'AIzaSyDVcTNwyy3SjCZ6TiEPT1bz8o46Y_lnevo'
 

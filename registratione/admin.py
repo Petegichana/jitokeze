@@ -23,7 +23,7 @@ class CustomPointWidget(PointWidget, BaseGMapWidget):
 class ShelterAdminForm(ModelForm):
     class Meta:
         model = Shelter
-        fields = ['name', 'price','owner_phone','photo','description','region','location']
+        fields = ['name','owner_phone','photo','contact','description','region','location']
         widgets = {
             'location': CustomPointWidget()
         }

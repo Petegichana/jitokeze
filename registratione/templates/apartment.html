@@ -27,7 +27,7 @@
     <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html">HProject</a>
+            <a class="navbar-brand" href="/">Counselling Hub</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -35,9 +35,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item">
-                        <a class="nav-link" href="/profile/">Profile</a>
-                    </li>
+
                 </ul>
             </div>
         </div>
@@ -45,49 +43,29 @@
 
     <!-- /.row -->
 
-    <!-- Portfolio Section -->
-    <h2>Portfolio</h2>
+
 
     <div class="row">
     <div class="col-lg-6">
         {% for apartment in apartments %}
-            <div class="card h-100" style="margin-top: 10%;margin-left: 230px;">
+            <div class="card h-100" style="margin-top: 10%;margin-left: 100px;">
                 <a href="#"><img class="card-img-top" src="{{ apartment.photo.url }}" alt="" height="400px" width="400px"></a>
                 <div class="card-body">
                     <h4 class="card-title">
                         <a href="#">{{ apartment.name }}</a>
                     </h4>
-                    <p class="card-text">{{ apartment.description | safe }}</p>
-                    <p class="card-text">KES {{ apartment.price }}</p>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+                    <p class="card-text">{{ apartment.contact | safe }}
+                         <a style="margin-top: 15%;margin-left: 100px;margin-bottom: 300px"
+                   href="https://api.whatsapp.com/send?phone=+{{ apartment.owner_phone }}&text=Hello,%0a%0a%0a I would like to book an appointment with {{ apartment.name }}  %0a%0a%0a http://localhost:8000/shelter/2  ">
+                    <button style="margin-top: 15%;margin-left: 100px;margin-right: 10px" type="button" class="btn btn-success btn-rounded">
+                        Book and appointment
 
-
-     {% for apartment in apartments %}
-    <div class="col-lg-6">
-        <div class="card h-100">
-            {% if user.is_authenticated %}
-                <a style="margin-top: 25%;margin-left: 230px;"
-                   href="https://api.whatsapp.com/send?phone=+{{ apartment.owner_phone }}&text=Hello,%0a%0a%0a I would like to book {{ apartment.name }} your house  %0a%0a%0a http://localhost:8000/apartment/2  ">
-                    <button style="margin-top: 15%;margin-left: 100px;margin-right: 100px" type="button" class="btn btn-success btn-rounded">
-                        Chat on Whatsapp
+                        {% if user.is_authenticated %}
                     </button>
-                </a>
-
-
-                <button type="button" class="btn btn-primary btn-rounded" data-mdb-toggle="modal"
-                        data-mdb-target="#exampleModal"
-                        style="margin-top: 15%;margin-left: 100px;margin-right: 100px">Book for {{ apartment.price }}</button>
-
-
-                <script language="javascript" type="text/javascript">
-                    function removeSpaces(string) {
-                        return string.split(' ').join('');
-                    }
-                </script>
-            {% else %}
+                            </a>
+                             <button type="button" class="btn btn-primary btn-rounded" data-mdb-toggle="modal"
+                        data-mdb-target="#exampleModal" >Donate to Shelter</button>
+                              {% else %}
 
                 <a href="/accounts/login/" style="margin-top: 25%;margin-left: 100px;margin-right: 100px">
                     <p>Login to book</p>
@@ -95,6 +73,23 @@
                     </button>
                 </a>
             {% endif %}
+                </a>
+                </div>
+            </div>
+
+
+
+        {% endfor %}
+    </div>
+
+
+     {% for apartment in apartments %}
+    <div class="col-lg-6">
+        <div class="card h-100" style="margin-top: 25%">
+        <h1>About</h1>
+        <p class="card-text">{{ apartment.description | safe }}</p>
+
+
 
 
 
@@ -104,7 +99,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">New booking</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Donate</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -123,8 +118,13 @@
                                     <input type="text" class="form-control" id="recipient-name"
                                            onblur="this.value=removeSpaces(this.value);"
                                            id="phone" value="" name="phone" required>
+                                     <label for="recipient-name" class="col-form-label">
+                                        Amount:</label>
+                                    <input type="text" class="form-control" id="recipient-amount"
+                                           onblur="this.value=removeSpaces(this.value);"
+                                           id="amount" value="" name="amount" required>
                                     <label for="recipient-name" class="col-form-label">
-                                        Apartment:</label>
+                                        Shelter:</label>
                                     <input type="text" class="form-control" id="recipient-name"
                                            onblur="this.value=removeSpaces(this.value);"
                                            id="apartment" value="{{ apartment.name }}" name="apartment" readonly>
@@ -134,7 +134,7 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                         Close
                                     </button>
-                                    <button type="submit" class="btn btn-primary">Book Now</button>
+                                    <button type="submit" class="btn btn-primary">Donate</button>
                                 </div>
                             </form>
                         </div>
@@ -156,7 +156,7 @@
     <!-- /.container -->
 
     <!-- Footer -->
-    <footer class="py-5 bg-dark" style="margin-top: 10%">
+    <footer class="py-5 bg-dark" style="margin-top: 15%">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Pete Gichana 2021</p>
         </div>

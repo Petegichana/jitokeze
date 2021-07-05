@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     url(r'^$',views.landing),
     url(r'^houses/',views.home,name='home'),
-    url(r'^apartment/(?P<id>\w+)$',views.apartment,name='apartment'),
+    url(r'^shelter/(?P<id>\w+)$',views.apartment,name='apartment'),
     url(r'^profile/$',views.profile,name='profile'),
     url(r'^accounts/edit/', views.edit_profile, name='edit_profile'),
     url('^lipaonline/$', views.lipa_na_mpesa, name='lipa_online'),
