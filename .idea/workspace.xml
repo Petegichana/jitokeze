@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6942f03-bc81-4045-b8ea-ec97cd054382" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoRegistration/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoRegistration/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registratione/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/registratione/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registratione/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/registratione/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registratione/templates/apartment.html" beforeDir="false" afterPath="$PROJECT_DIR$/registratione/templates/apartment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registratione/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/registratione/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registratione/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/registratione/templates/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registratione/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/registratione/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registratione/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/registratione/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,7 +218,8 @@
       <workItem from="1625430148797" duration="55000" />
       <workItem from="1625500913952" duration="897000" />
       <workItem from="1625502772046" duration="60000" />
-      <workItem from="1625503501966" duration="1203000" />
+      <workItem from="1625503501966" duration="2828000" />
+      <workItem from="1625757382849" duration="922000" />
     </task>
     <servers />
   </component>
