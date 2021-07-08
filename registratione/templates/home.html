@@ -1,49 +1,150 @@
-{% load bootstrap4 %}
+{% extends 'base.html' %}
 {% load static %}
-{% block styles %}
-    {% bootstrap_css %}
-  {% endblock %}
-
 {% block content %}
-{% if user.is_authenticated %}
+    {{ block.super }}
+    <body>
 
-    <div class="container">
-    <div class="row">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 900px;
+        }
 
-        <div class="col-md-4">
-            <a href="/accounts/login"><button type="button" class="btn btn-outline-primary">Login</button></a>
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 
-<a href="{% url 'signup' %}"><button type="button" class="btn btn-outline-success">Sign Up</button></a>
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Counselling Hub</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
 
-
+                </ul>
+            </div>
         </div>
-        <div class="col-md-4">
-    <p>Welcome {{ user.username }}</p>
-
-                {% if profile_details.photo %}
-        <img src="{{profile_details.photo.url}}" alt="profile-photo" class="img-thumbnail rounded-circle prof" style="width: 200px;height: 200px">
-        {% else %}
-        <img src="{% static 'images/avatar.jpg' %}" alt="avatar" class="img-thumbnail rounded-circle prof" style="width: 200px;height: 200px">
-        {% endif %}
+    </nav>
 
 
-                {% if profile_details.bio %}
-        <h1>{{ profile_details.bio }}</h1>
-        {% else %}
-        <h1>No bio</h1>
-        {% endif %}
+    <!-- Page Content -->
+    <div class="container">
 
 
+        <!-- /.row -->
 
-</div>
+        <!-- Portfolio Section -->
+        <h2>Shelter</h2>
 
-           <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-6" style="overflow: scroll;">
 
-               <a href="/accounts/edit"><button type="button" class="btn btn-outline-info">Edit Profile</button></a>
-               <a href="/accounts/password/change/"><button type="button" class="btn btn-outline-warning">Change Password</button></a>
-   <a href="/logout/"><button type="button" class="btn btn-outline-secondary">Logout</button> </a>
-</div>
+
+                {% for apartment in apartments %}
+                    <div class="card">
+                        <a href="#"><img class="card-img-top" src="{{ apartment.photo.url }}" alt="" width="300"
+                                         height="300"></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="/shelter/{{ apartment.id }}">{{ apartment.name }}</a>
+                            </h4>
+                            <div class="container">
+                                <span id="rateMe2" class="empty-stars"></span>
+                            </div>
+
+                            <!-- rating.js file -->
+                            <script src="js/addons/rating.js"></script>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-6">
+                <script src="http://maps.google.com/maps/api/js?sensor=false"
+                        type="text/javascript"></script>
+                <div id="map"></div>
+                <script type="text/javascript">
+                    var locations = [
+                        {% for apartment in apartments %}
+                            ['<a href="/shelter/{{ apartment.id }}"><h3>{{ apartment.name }}</h3> </a> ',
+                                {{ apartment.location.y }},
+                                {{ apartment.location.x }}],
+                        {% endfor %}
+                    ];
+
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 12,
+                        center: new google.maps.LatLng(-1.2972200152364932, 36.80394172156111),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    });
+
+                    var infowindow = new google.maps.InfoWindow();
+
+                    var marker, i;
+
+                    for (i = 0; i < locations.length; i++) {
+                        marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                            map: map,
+                            infowindow: {
+                                content: '<p>Hood Guy</p>'
+                            }
+                        });
+
+                        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                            return function () {
+                                infowindow.setContent(locations[i][0]);
+                                infowindow.open(map, marker);
+                            }
+                        })(marker, i));
+                    }
+                </script>
+
+            </div>
+        </div>
+
+
+        <hr>
+
+        <!-- Call to Action Section -->
+        <div class="row mb-4" style="margin-top: 100px">
+
+            <div class="col-md-12">
+                <a class="btn btn-lg btn-secondary btn-block" href="#">Get help today!</a>
+            </div>
+        </div>
+
     </div>
-    </div>
-{% endif %}
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Pete Gichana 2021</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+
 {% endblock %}
+
+
+

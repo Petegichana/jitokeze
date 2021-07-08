@@ -4,12 +4,14 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.signup, name='signup'),
-    url(r'^home/',views.home,name='home'),
+    url(r'^$',views.landing),
+    url(r'^houses/',views.home,name='home'),
+    url(r'^shelter/(?P<id>\w+)$',views.apartment,name='apartment'),
+    url(r'^profile/$',views.profile,name='profile'),
     url(r'^accounts/edit/', views.edit_profile, name='edit_profile'),
-    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        views.activate, name='activate'),
-
+    url('^lipaonline/$', views.lipa_na_mpesa, name='lipa_online'),
+    url('^token/$',views.access_token,name='access_token'),
+    url('^map/$',views.map,name='map')
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

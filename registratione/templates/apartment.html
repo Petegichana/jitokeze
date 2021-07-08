@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {{ block.super }}
+    <body>
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"
+    ></script>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Counselling Hub</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- /.row -->
+
+
+
+    <div class="row">
+    <div class="col-lg-6">
+        {% for apartment in apartments %}
+            <div class="card h-100" style="margin-top: 10%;margin-left: 100px;">
+                <a href="#"><img class="card-img-top" src="{{ apartment.photo.url }}" alt="" height="400px" width="400px"></a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">{{ apartment.name }}</a>
+                    </h4>
+                    <p class="card-text">{{ apartment.contact | safe }}
+                         <a style="margin-top: 15%;margin-left: 100px;margin-bottom: 300px"
+                   href="https://api.whatsapp.com/send?phone=+{{ apartment.owner_phone }}&text=Hello,%0a%0a%0a I would like to book an appointment with {{ apartment.name }}  %0a%0a%0a http://localhost:8000/shelter/2  ">
+                    <button style="margin-top: 15%;margin-left: 100px;margin-right: 10px" type="button" class="btn btn-success btn-rounded">
+                        Book and appointment
+
+                        {% if user.is_authenticated %}
+                    </button>
+                            </a>
+                             <button type="button" class="btn btn-primary btn-rounded" data-mdb-toggle="modal"
+                        data-mdb-target="#exampleModal" >Donate to Shelter</button>
+                              {% else %}
+
+                <a href="/accounts/login/" style="margin-top: 25%;margin-left: 100px;margin-right: 100px">
+                    <p>Login to book shelter</p>
+                    <button type="button" class="btn btn-primary" style="width: 100%;">Login
+                    </button>
+                </a>
+            {% endif %}
+                </a>
+                </div>
+            </div>
+
+
+
+        {% endfor %}
+    </div>
+
+
+     {% for apartment in apartments %}
+    <div class="col-lg-6">
+        <div class="card h-100" style="margin-top: 25%">
+        <h1>About</h1>
+        <p class="card-text">{{ apartment.description | safe }}</p>
+
+
+
+
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Donate</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{% url "lipa_online" %}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">
+                                        Name:</label>
+                                    <input type="text" class="form-control" id="recipient-name"
+                                           id="name" name="name" value="" required>
+
+                                    <label for="recipient-name" class="col-form-label">
+                                        Phone:</label>
+                                    <input type="text" class="form-control" id="recipient-name"
+                                           onblur="this.value=removeSpaces(this.value);"
+                                           id="phone" value="" name="phone" required>
+                                     <label for="recipient-name" class="col-form-label">
+                                        Amount:</label>
+                                    <input type="text" class="form-control" id="recipient-amount"
+                                           onblur="this.value=removeSpaces(this.value);"
+                                           id="amount" value="" name="amount" required>
+                                    <label for="recipient-name" class="col-form-label">
+                                        Shelter:</label>
+                                    <input type="text" class="form-control" id="recipient-name"
+                                           onblur="this.value=removeSpaces(this.value);"
+                                           id="apartment" value="{{ apartment.name }}" name="apartment" readonly>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Donate</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    {% endfor %}
+
+
+    <hr>
+
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark" style="margin-top: 15%">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Pete Gichana 2021</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+
+{% endblock %}
+
+
+

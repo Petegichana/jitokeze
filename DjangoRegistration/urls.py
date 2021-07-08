@@ -20,7 +20,7 @@ from django.conf.urls import url,include
 urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'',include('registratione.urls')),
-    url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^logout/$',views.logout,{"next_page":'/accounts/login/'}),
-
+    url(r'^accounts/', include('django_registration.backends.one_step.urls')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^api/payments/', include('registratione.api.urls')),
 ]

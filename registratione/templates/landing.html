@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {{ block.super }}
+
+
+    <body id="page-top" style="background-image: url('{% static 'images/mentalhealth.png' %}');background-size: 100vw 100vh;">
+
+    <!-- Header -->
+    <header class="masthead d-flex" style="margin-top: 300px;color: #ffffff;">
+        <div class="container text-center my-auto">
+            <h1 class="mb-1" style="font-size: 80px;color: rebeccapurple">Don't suffer in silence</h1>
+            <h3 class="mb-5">
+                <em>Get help today!</em>
+            </h3>
+            <br/><br/><br/>
+
+        </div>
+
+
+        <div class="overlay">
+        </div>
+    </header>
+
+
+    </body>
+
+{% endblock %}
+
+
+
