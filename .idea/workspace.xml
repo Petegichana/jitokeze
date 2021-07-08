@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6942f03-bc81-4045-b8ea-ec97cd054382" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DjangoRegistration/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoRegistration/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/registratione/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/registratione/templates/base.html" afterDir="false" />
@@ -296,7 +297,7 @@
       <workItem from="1625503501966" duration="2828000" />
       <workItem from="1625757382849" duration="922000" />
       <workItem from="1625758992698" duration="616000" />
-      <workItem from="1625760547837" duration="4598000" />
+      <workItem from="1625760547837" duration="5006000" />
     </task>
     <servers />
   </component>
