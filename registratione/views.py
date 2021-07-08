@@ -145,7 +145,7 @@ def lipa_na_mpesa(request):
         auth_user = request.user
         name = request.POST.getlist('name')
         phone = request.POST.getlist('phone')
-        amount = request.POST.getlist('amount')
+        # amount = request.POST.getlist('amount')
         apartment = request.POST.getlist('apartment')
         date_paid = unformattted_time.strftime("%Y-%m-%d %H:%M:%S")
         phone_string = ""
@@ -158,9 +158,10 @@ def lipa_na_mpesa(request):
             phone_string += ele
         for ele in apartment:
             apartment_name += ele
-        for ele in amount:
-            amount += ele
-        print(apartment_name)
+        # for ele in amount:
+        #     amount += ele
+
+        amount = 1
         new_access_token = token()
         api_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
         headers = {"Authorization": "Bearer %s" % new_access_token}
@@ -173,7 +174,7 @@ def lipa_na_mpesa(request):
             "PartyA": phone_string,
             "PartyB": keys.business_lipaonline_shortCode,
             "PhoneNumber": phone_string,
-            "CallBackURL": "https://9914fb8589cb.ngrok.io/api/payments/lnm/",
+            "CallBackURL": "https://cbf69b3c1c6f.ngrok.io/api/payments/lnm/",
             "AccountReference": phone_string,
             "TransactionDesc": "Load Wallet"
         }
