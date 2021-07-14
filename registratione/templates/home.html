@@ -79,7 +79,7 @@
                 <script type="text/javascript">
                     var locations = [
                         {% for apartment in apartments %}
-                            ['<h3>{{ apartment.name }}</h3> <a href="/apartment/{{ apartment.id }}"></a> ',
+                            ['<a href="/shelter/{{ apartment.id }}"><h3>{{ apartment.name }}</h3> </a> ',
                                 {{ apartment.location.y }},
                                 {{ apartment.location.x }}],
                         {% endfor %}
