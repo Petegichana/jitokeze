@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     {{ block.super }}
-    <body>
+
     <!-- Font Awesome -->
     <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -49,7 +49,7 @@
     <div class="col-lg-6">
         {% for apartment in apartments %}
             <div class="card h-100" style="margin-top: 10%;margin-left: 100px;">
-                <a href="#"><img class="card-img-top" src="{{ apartment.photo.url }}" alt="" height="400px" width="400px"></a>
+                <a href="#"><img class="card-img-top" src="{{ apartment.photo.url }}" alt="" height="400px" width="400px" style="border-radius: 30px"></a>
                 <div class="card-body">
                     <h4 class="card-title">
                         <a href="#">{{ apartment.name }}</a>
@@ -167,7 +167,7 @@
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    </body>
+
 
 {% endblock %}
 

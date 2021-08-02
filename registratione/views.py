@@ -42,6 +42,8 @@ def apartment(request, id):
 
     return render(request, 'apartment.html', locals())
 
+def therapist(request):
+    return render(request, 'therapist.html')
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
@@ -174,7 +176,7 @@ def lipa_na_mpesa(request):
             "PartyA": phone_string,
             "PartyB": keys.business_lipaonline_shortCode,
             "PhoneNumber": phone_string,
-            "CallBackURL": "https://cbf69b3c1c6f.ngrok.io/api/payments/lnm/",
+            "CallBackURL": "https://e63e2ad2066a.ngrok.io/api/payments/lnm/",
             "AccountReference": phone_string,
             "TransactionDesc": "Load Wallet"
         }
@@ -185,8 +187,8 @@ def lipa_na_mpesa(request):
             phone=phone_string,
             apartment=apartment_name,
             payment_amount=payer_amount,
-            payment_id="Unpaid",
-            payment_status="Unpaid",
+            payment_id="Paid",
+            payment_status="Paid",
             date_paid=date_paid
         )
         save_receipt.save()

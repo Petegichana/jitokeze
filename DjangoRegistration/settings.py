@@ -24,7 +24,7 @@ SECRET_KEY = '8r2lhl$oh5t=9evk=g7y!yh%nm1%k2&(i302-xvsn=t_k3+%(5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cbf69b3c1c6f.ngrok.io', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['e63e2ad2066a.ngrok.io', 'localhost', '127.0.0.1']
 
 # EASY_MAPS_GOOGLE_KEY = 'AIzaSyDVcTNwyy3SjCZ6TiEPT1bz8o46Y_lnevo'
 
@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ['cbf69b3c1c6f.ngrok.io', 'localhost', '127.0.0.1']
 INSTALLED_APPS = [
     'registratione',
     'mapwidgets',
-    'django_restframework',
+    'rest_framework',
     'django_registration',
     'ckeditor',
     'star_ratings',
@@ -100,11 +100,11 @@ WSGI_APPLICATION = 'DjangoRegistration.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'housingproject',
-        'USER': 'postgres',
-        'PASSWORD': 'sigilai',
+        'NAME': 'shelter',
+        'USER': 'petergichana',
+        'PASSWORD': 'petergichana',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
