@@ -10,12 +10,13 @@ cachetools==4.2.1
 certifi==2018.10.15
 cffi==1.11.5
 chardet==3.0.4
+charset-normalizer==2.0.4
 click==7.1.2
 confusable-homoglyphs==3.2.0
 cryptography==2.4.1
 cssselect==1.1.0
 cssutils==2.2.0
-Django==1.11
+Django==2.0
 django-appconf==1.0.4
 django-bootstrap3==11.0.0
 django-bootstrap4==0.0.7
@@ -23,6 +24,7 @@ django-braces==1.14.0
 django-ckeditor==6.0.0
 django-classy-tags==2.0.0
 django-cors-headers==3.7.0
+django-floppyforms==1.9.0
 django-js-asset==1.2.2
 django-map-widgets==0.3.0
 django-model-utils==4.1.1
@@ -46,6 +48,7 @@ ipaddress==1.0.22
 iso-639==0.4.5
 iso3166==0.9
 isodate==0.6.0
+jeepney==0.7.1
 joblib==1.0.1
 Keras-Applications==1.0.6
 Keras-Preprocessing==1.0.5

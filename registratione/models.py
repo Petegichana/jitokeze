@@ -81,7 +81,14 @@ class Receipt(models.Model):
     payment_status = models.CharField(max_length=50, blank=True, null=True)
     date_paid = models.CharField(max_length=50, blank=True, null=True)
 
+
     def __str__(self):
         return self.payer
 
+class Booking(models.Model):
+    name = models.CharField(max_length=50,blank=True,null=True)
+    phone = models.CharField(max_length=50, blank=True, null=True)
+    location = models.CharField(max_length=50, blank=True, null=True)
 
+    def __str__(self):
+        return self.name

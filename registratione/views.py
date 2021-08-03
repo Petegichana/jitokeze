@@ -176,7 +176,7 @@ def lipa_na_mpesa(request):
             "PartyA": phone_string,
             "PartyB": keys.business_lipaonline_shortCode,
             "PhoneNumber": phone_string,
-            "CallBackURL": "https://e63e2ad2066a.ngrok.io/api/payments/lnm/",
+            "CallBackURL": "https://74806a7bd9f9.ngrok.io/api/payments/lnm/",
             "AccountReference": phone_string,
             "TransactionDesc": "Load Wallet"
         }
