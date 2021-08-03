@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import ProfileForm
-from .models import Profile, Shelter, Receipt
+from .models import Profile, Shelter, Receipt, Booking
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -196,3 +196,38 @@ def lipa_na_mpesa(request):
         response = requests.post(api_url, json=request, headers=headers)
 
         return HttpResponseRedirect('/profile/', response)
+
+
+def booking(request):
+    if request.method == "POST":
+        auth_user = request.user
+        name = request.POST.getlist('name')
+        phone = request.POST.getlist('phone')
+        location = request.POST.getlist('location')
+        shelter = request.POST.getlist('shelter')
+        phone_string = ""
+        user_name = ""
+        payer_amount = ""
+        location_name = ""
+        shelter_name = ""
+        for ele in name:
+            user_name += ele
+        for ele in phone:
+            phone_string += ele
+        for ele in location:
+            location_name += ele
+        for ele in shelter:
+            shelter_name += ele
+
+
+        save_booking = Booking(
+            name = user_name,
+            phone = phone_string,
+            location = location_name,
+            shelter_name = shelter_name
+        )
+
+        save_booking.save()
+
+
+        return HttpResponseRedirect('/home')

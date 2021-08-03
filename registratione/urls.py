@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^profile/$',views.profile,name='profile'),
     url(r'^accounts/edit/', views.edit_profile, name='edit_profile'),
     url('^lipaonline/$', views.lipa_na_mpesa, name='lipa_online'),
+    url('^booking/$', views.booking, name='booking'),
     url('^token/$',views.access_token,name='access_token'),
     url('^map/$',views.map,name='map')
 ]

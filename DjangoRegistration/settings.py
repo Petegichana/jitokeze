@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ['74806a7bd9f9.ngrok.io', 'localhost', '127.0.0.1']
 INSTALLED_APPS = [
     'registratione',
     'mapwidgets',
-    'django_restframework',
+    #'django_restframework',
     'django_registration',
     'ckeditor',
     'star_ratings',

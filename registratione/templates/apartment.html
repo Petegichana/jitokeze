@@ -55,16 +55,10 @@
                         <a href="#">{{ apartment.name }}</a>
                     </h4>
                     <p class="card-text">{{ apartment.contact | safe }}
-                         <a style="margin-top: 15%;margin-left: 100px;margin-bottom: 300px"
-                   href="https://api.whatsapp.com/send?phone=+{{ apartment.owner_phone }}&text=Hello,%0a%0a%0a I would like to book an appointment with {{ apartment.name }}  %0a%0a%0a http://localhost:8000/shelter/2  ">
-                    <button style="margin-top: 15%;margin-left: 100px;margin-right: 10px" type="button" class="btn btn-success btn-rounded">
-                        Book and appointment
 
-                        {% if user.is_authenticated %}
-                    </button>
-                            </a>
-                             <button type="button" class="btn btn-primary btn-rounded" data-mdb-toggle="modal"
-                        data-mdb-target="#exampleModal" >Donate to Shelter</button>
+                    <button style="margin-top: 15%;margin-left: 100px;margin-right: 10px" type="button" class="btn btn-success btn-rounded" data-mdb-toggle="modal" data-mdb-target="#bookingModal" >Book and appointment {% if user.is_authenticated %}</button>
+
+                             <button type="button" class="btn btn-primary btn-rounded" data-mdb-toggle="modal" data-mdb-target="#exampleModal" >Donate to Shelter</button>
                               {% else %}
 
                 <a href="/accounts/login/" style="margin-top: 25%;margin-left: 100px;margin-right: 100px">
@@ -142,6 +136,65 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
+
+                <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Book Shelter</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{% url "booking" %}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">
+                                        Name:</label>
+                                    <input type="text" class="form-control" id="recipient-name"
+                                           id="name" name="name" value="" required>
+
+                                    <label for="recipient-phone" class="col-form-label">
+                                        Phone:</label>
+                                    <input type="text" class="form-control" id="recipient-name"
+                                           onblur="this.value=removeSpaces(this.value);"
+                                           id="phone" value="" name="phone" required>
+                                    <label for="recipient-location" class="col-form-label">
+                                        Location:</label>
+                                    <input type="text" class="form-control" id="recipient-name"
+                                           onblur="this.value=removeSpaces(this.value);"
+                                           id="location" value="" name="location" required>
+                                     <label for="recipient-name" class="col-form-label">
+                                        Shelter:</label>
+                                    <input type="text" class="form-control" id="recipient-name"
+                                           onblur="this.value=removeSpaces(this.value);"
+                                           id="shelter" value="{{ apartment.name }}" name="shelter" readonly>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Book</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
 
 
         </div>
