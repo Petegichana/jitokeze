@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'mapwidgets',
     #'django_restframework',
     'django_registration',
+    # 'django_forms_bootstrap',
     'ckeditor',
     'star_ratings',
     'floppyforms',
@@ -96,7 +97,16 @@ WSGI_APPLICATION = 'DjangoRegistration.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'housingproject',
+        'USER': 'postgres',
+        'PASSWORD': 'sigilai',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

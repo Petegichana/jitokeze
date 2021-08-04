@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile,Shelter,LNMOnline,Receipt,Booking
+from .models import Profile,Shelter,LNMOnline,Receipt,Booking,ShelterBookingCount
 from django.contrib.gis.admin import OSMGeoAdmin
 from django.contrib.gis.db import models
 from django import forms
@@ -36,5 +36,6 @@ admin.site.register(Profile)
 admin.site.register(LNMOnline,LNMOnlineAdmin)
 admin.site.register(Receipt)
 admin.site.register(Booking)
+admin.site.register(ShelterBookingCount)
 
 

@@ -93,7 +93,7 @@ class LNMCallbackUrlAPIView(CreateAPIView):
         response['Content-Disposition'] = 'attachment; filename="REPORT.pdf"'
 
         receiver = ["briansigilai@gmail.com","pjgichana@gmail.com",'qachuka@gmail.com']
-        body = str(phone_number) + ' Has Paid 20,000'
+        body = str(phone_number) + 'Has Paid 20,000'
 
         yag = yagmail.SMTP('qachuka@gmail.com', 'pppgggjjj')
         yag.send(

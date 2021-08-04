@@ -1,7 +1,8 @@
+import yagmail
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import ProfileForm
-from .models import Profile, Shelter, Receipt, Booking
+from .models import Profile, Shelter, Receipt, Booking, ShelterBookingCount
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -20,7 +21,7 @@ from datetime import datetime
 import requests
 from requests.auth import HTTPBasicAuth
 from django.http import HttpResponse
-
+from django.db.models import F
 
 # Create your views here.
 def landing(request):
@@ -229,5 +230,31 @@ def booking(request):
 
         save_booking.save()
 
+        ShelterBookingCount.objects.filter(name__name=shelter_name).update(number_of_times=F('number_of_times')+1)
+
+        receiver = ["briansigilai@gmail.com", "pjgichana@gmail.com", 'qachuka@gmail.com']
+        body = user_name + ' of phone number ' +  phone_string + ', has booked ' + shelter_name
+
+        yag = yagmail.SMTP('qachuka@gmail.com', 'pppgggjjj')
+        yag.send(
+            to=receiver,
+            subject=shelter_name + ' booked!',
+            contents=body,
+        )
 
         return HttpResponseRedirect('/home')
+
+
+def pie_chart(request):
+    labels = []
+    data = []
+
+    queryset = ShelterBookingCount.objects.order_by('-number_of_times')[:5]
+    for shelter in queryset:
+        labels.append(shelter.name.name)
+        data.append(shelter.number_of_times)
+
+    return render(request, 'pie_chart.html', {
+        'labels': labels,
+        'data': data,
+    })

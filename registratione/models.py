@@ -93,3 +93,10 @@ class Booking(models.Model):
 
     def __str__(self):
         return self.name
+
+class ShelterBookingCount(models.Model):
+    name = models.ForeignKey(Shelter, on_delete=models.CASCADE,default=0)
+    number_of_times = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.name.name

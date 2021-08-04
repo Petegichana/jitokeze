@@ -13,7 +13,8 @@ urlpatterns = [
     url('^lipaonline/$', views.lipa_na_mpesa, name='lipa_online'),
     url('^booking/$', views.booking, name='booking'),
     url('^token/$',views.access_token,name='access_token'),
-    url('^map/$',views.map,name='map')
+    url('^map/$',views.map,name='map'),
+    url('pie-chart/', views.pie_chart, name='pie-chart'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
