@@ -103,7 +103,7 @@ def signup(request):
             return HttpResponse('Please confirm your email address to complete the registration')
     else:
         form = SignupForm()
-    return render(request, 'django_registration/registration_form.html', {'form': form})
+    return render(request, 'django_registration/login.html', {'form': form})
 
 
 unformattted_time = datetime.now()

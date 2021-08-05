@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     #'django_restframework',
     'django_registration',
     # 'django_forms_bootstrap',
+    'bootstrap4',
     'ckeditor',
     'star_ratings',
     'floppyforms',
