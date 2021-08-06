@@ -3,7 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 from .models import Profile
-
+from paypal.standard.forms import PayPalPaymentsForm
+from django.utils.html import format_html
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required')
@@ -17,4 +18,3 @@ class ProfileForm(forms.ModelForm):
         exclude = ['user']
 
 
-#

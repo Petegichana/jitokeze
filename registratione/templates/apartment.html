@@ -58,7 +58,9 @@
 
                     <button style="margin-top: 15%;margin-left: 100px;margin-right: 10px" type="button" class="btn btn-success btn-rounded" data-mdb-toggle="modal" data-mdb-target="#bookingModal" >Book and appointment {% if user.is_authenticated %}</button>
 
-                             <button type="button" class="btn btn-primary btn-rounded" data-mdb-toggle="modal" data-mdb-target="#exampleModal" >Donate to Shelter</button>
+                        <a href="process-payment/"><button type="button" class="btn btn-primary btn-rounded"  >Donate to Shelter</button></a>
+
+
                               {% else %}
 
                 <a href="/accounts/login/" style="margin-top: 25%;margin-left: 100px;margin-right: 100px">
@@ -99,7 +101,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{% url "lipa_online" %}" method="POST">
+                            <form action="" method="POST">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">
