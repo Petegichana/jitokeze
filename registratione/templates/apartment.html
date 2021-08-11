@@ -56,9 +56,9 @@
                     </h4>
                     <p class="card-text">{{ apartment.contact | safe }}
 
-                    <button style="margin-top: 15%;margin-left: 100px;margin-right: 10px" type="button" class="btn btn-success btn-rounded" data-mdb-toggle="modal" data-mdb-target="#bookingModal" >Book and appointment {% if user.is_authenticated %}</button>
+                    <button style="margin-top: 15%;margin-left: 100px;margin-right: 10px" type="button" class="btn btn-success btn-rounded" data-mdb-toggle="modal" data-mdb-target="#bookingModal" >Book Space {% if user.is_authenticated %}</button>
 
-                        <a href="process-payment/"><button type="button" class="btn btn-primary btn-rounded"  >Donate to Shelter</button></a>
+                        <button type="button" class="btn btn-primary btn-rounded" data-mdb-toggle="modal" data-mdb-target="#exampleModal">Donate to Shelter</button>
 
 
                               {% else %}
@@ -87,9 +87,6 @@
 
 
 
-
-
-
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -101,13 +98,13 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="" method="POST">
+                            <form action="{% url 'make_donation' %}" method="POST">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">
                                         Name:</label>
                                     <input type="text" class="form-control" id="recipient-name"
-                                           id="name" name="name" value="" required>
+                                           id="name" name="name" value="{{ user.username }}" readonly>
 
                                     <label for="recipient-name" class="col-form-label">
                                         Phone:</label>

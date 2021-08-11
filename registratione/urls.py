@@ -5,13 +5,13 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^$',views.landing),
+    url(r'^$',views.landing,name='landing'),
     url(r'^home/',views.home,name='home'),
     url(r'^therapist/',views.therapist,name='therapist'),
     url(r'^shelter/(?P<id>\w+)$',views.apartment,name='apartment'),
     url(r'^profile/$',views.profile,name='profile'),
     url(r'^accounts/edit/', views.edit_profile, name='edit_profile'),
-    # url('^lipaonline/$', views.lipa_na_mpesa, name='lipa_online'),
+    url('^makedonation/$', views.make_donation, name='make_donation'),
     url('^booking/$', views.booking, name='booking'),
     # url('^token/$',views.access_token,name='access_token'),
     url('^map/$',views.map,name='map'),

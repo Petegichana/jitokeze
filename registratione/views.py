@@ -37,6 +37,8 @@ from decimal import Decimal
 
 # Create your views here.
 def landing(request):
+
+
     return render(request, 'landing.html')
 
 
@@ -51,6 +53,11 @@ def home(request):
 
 
 def apartment(request, id):
+
+    order_id = request.session.get('order_id')
+    host = request.get_host()
+
+
     apartments = Shelter.objects.filter(id=id)
 
     return render(request, 'apartment.html', locals())
@@ -155,62 +162,44 @@ def signup(request):
 #     value = value.json()
 #
 #     return value['access_token']
-#
-#
-# def lipa_na_mpesa(request):
-#     if request.method == "POST":
-#         auth_user = request.user
-#         name = request.POST.getlist('name')
-#         phone = request.POST.getlist('phone')
-#         # amount = request.POST.getlist('amount')
-#         apartment = request.POST.getlist('apartment')
-#         date_paid = unformattted_time.strftime("%Y-%m-%d %H:%M:%S")
-#         phone_string = ""
-#         payer_string = ""
-#         payer_amount = ""
-#         apartment_name = ""
-#         for ele in name:
-#             payer_string += ele
-#         for ele in phone:
-#             phone_string += ele
-#         for ele in apartment:
-#             apartment_name += ele
-#         # for ele in amount:
-#         #     amount += ele
-#
-#         amount = 1
-#         new_access_token = token()
-#         api_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
-#         headers = {"Authorization": "Bearer %s" % new_access_token}
-#         request = {
-#             "BusinessShortCode": keys.business_lipaonline_shortCode,
-#             "Password": decoded_password,
-#             "Timestamp": formatted_time,
-#             "TransactionType": "CustomerPayBillOnline",
-#             "Amount": amount,
-#             "PartyA": phone_string,
-#             "PartyB": keys.business_lipaonline_shortCode,
-#             "PhoneNumber": phone_string,
-#             "CallBackURL": "https://74806a7bd9f9.ngrok.io/api/payments/lnm/",
-#             "AccountReference": phone_string,
-#             "TransactionDesc": "Load Wallet"
-#         }
-#
-#         save_receipt = Receipt(
-#             user=auth_user,
-#             payer=payer_string,
-#             phone=phone_string,
-#             apartment=apartment_name,
-#             payment_amount=payer_amount,
-#             payment_id="Paid",
-#             payment_status="Paid",
-#             date_paid=date_paid
-#         )
-#         save_receipt.save()
-#
-#         response = requests.post(api_url, json=request, headers=headers)
-#
-#         return HttpResponseRedirect('/profile/', response)
+
+
+def make_donation(request):
+    if request.method == "POST":
+        auth_user = request.user
+        name = request.POST.getlist('name')
+        phone = request.POST.getlist('phone')
+        amount = request.POST.getlist('amount')
+        apartment = request.POST.getlist('apartment')
+
+        phone_string = ""
+        payer_string = ""
+        payer_amount = ""
+        apartment_name = ""
+        for ele in name:
+            payer_string += ele
+        for ele in phone:
+            phone_string += ele
+        for ele in apartment:
+            apartment_name += ele
+        for ele in amount:
+            payer_amount += ele
+
+
+        save_receipt = Receipt(
+            user=auth_user,
+            payer=payer_string,
+            phone=phone_string,
+            apartment=apartment_name,
+            payment_amount=payer_amount,
+            payment_id="Paid",
+            payment_status="Paid",
+        )
+        save_receipt.save()
+
+
+
+        return HttpResponseRedirect('/shelter/process-payment/')
 
 
 def booking(request):
@@ -280,16 +269,20 @@ def process_payment(request):
     order_id = request.session.get('order_id')
     host = request.get_host()
     print(secrets.token_hex(nbytes=16))
+    receipt = Receipt.objects.filter(user=request.user.username).last().payment_amount
+    amount = ''
+    # for r in receipt:
+    #     amount += r.payment_amount
 
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
-        'amount': '10.00',
+        'amount': str(receipt),
         'item_name': 'Order 254',
         'invoice': secrets.token_hex(nbytes=16),
         'currency_code': 'USD',
-        'notify_url': 'https://35b38f22bcf9.ngrok.io/paypal/',
-        'return_url': 'https://35b38f22bcf9.ngrok.io/home',
-        'cancel_return': 'https://35b38f22bcf9.ngrok.io/payment-cancelled/',
+        'notify_url': 'https://a41d5b6340b5.ngrok.io/paypal/',
+        'return_url': 'http://localhost:8000/home',
+        'cancel_return': 'https://a41d5b6340b5.ngrok.io/payment-cancelled/',
     }
 
     form = PayPalPaymentsForm(initial=paypal_dict)
